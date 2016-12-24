@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['name', 'type'];
+    protected $fillable = ['name', 'type', 'main_category_id'];
 
     protected $rules = [
         'name' => 'required',

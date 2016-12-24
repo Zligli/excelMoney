@@ -12,9 +12,11 @@ class ImportController extends Controller
 {
     protected $sheet;
     protected $category;
+    protected $initialCategories;
 
     public function __construct(ImportMoney $importMoney, Category $category)
     {
+        $this->initialCategories = collect(config('initialcategories'));
         $this->sheet = $importMoney->all();
         $this->category = $category;
     }
@@ -29,28 +31,25 @@ class ImportController extends Controller
 
     public function importMainCategories()
     {
-        MainCategory::create(['name' => 'Mains']);
+        $this->initialCategories->transform(function ($item, $key) {
+            $mainCategory = MainCategory::create(['name' => $item['main_name']]);
+            $item['main_id'] = $mainCategory->id;
+            return $item;
+
+        });
+
     }
 
     public function importCategories()
     {
+        $this->initialCategories->transform(function ($item, $key) {
+            foreach ($item['categories'] as $category) {
+                Category::create(['name' => $category, 'main_category_id' => $item['main_id'], 'type' => $item['type']]);
+            }
+            return $item;
 
-        $grouped = $this->sheet->groupBy('tip');
-        $category_names = array_keys($grouped->toArray());
+        });
 
-        $categories = [];
-
-        foreach ($category_names as $category_name) {
-            $category_name = strtolower($category_name);
-            $category['name'] = ucfirst($category_name);
-            $category['main_category_id'] = 1;
-            $category['type'] = str_contains($category_name, ["plata", "prihod"]) === false ? "cost" : "income";
-            $category['created_at'] = new \DateTime();
-            $category['updated_at'] = new \DateTime();
-            $categories[] = $category;
-        }
-
-        Category::insert($categories);
     }
 
     public function importTransactions()

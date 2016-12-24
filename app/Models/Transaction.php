@@ -15,7 +15,6 @@ class Transaction extends Model
         'price' => 'required',
         'description' => 'required'
     ];
-    protected $timestamps;
 
     public function category()
     {

@@ -29,4 +29,9 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Transaction');
     }
+
+    public function getByName($name)
+    {
+        return $this->where(['name' => $name])->first();
+    }
 }

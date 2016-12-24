@@ -10,14 +10,32 @@ use App\Models\Transaction;
 
 class ImportController extends Controller
 {
+    protected $sheet;
+    protected $category;
 
-
-    public function get(ImportMoney $importMoney)
+    public function __construct(ImportMoney $importMoney, Category $category)
     {
-        $sheet = $importMoney->all();
+        $this->sheet = $importMoney->all();
+        $this->category = $category;
+    }
 
-        $grouped = $sheet->groupBy('tip');
+    public function importAll()
+    {
+        $this->importMainCategories();
+        $this->importCategories();
+        $this->importTransactions();
+    }
 
+
+    public function importMainCategories()
+    {
+        MainCategory::create(['name' => 'Mains']);
+    }
+
+    public function importCategories()
+    {
+
+        $grouped = $this->sheet->groupBy('tip');
         $category_names = array_keys($grouped->toArray());
 
         $categories = [];
@@ -27,13 +45,29 @@ class ImportController extends Controller
             $category['name'] = ucfirst($category_name);
             $category['main_category_id'] = 1;
             $category['type'] = str_contains($category_name, ["plata", "prihod"]) === false ? "cost" : "income";
+            $category['created_at'] = new \DateTime();
+            $category['updated_at'] = new \DateTime();
             $categories[] = $category;
         }
-//        $mainCategory = new MainCategory();
-        MainCategory::create(['name'=>'Mains', 'name'=>'Nots', 'name' => 'SXX']);
-//        MainCategory::insert(['name'=>'Main']);
 
-//        Category::insert($categories);
+        Category::insert($categories);
     }
 
+    public function importTransactions()
+    {
+        $transactions = [];
+
+        foreach ($this->sheet as $row) {
+            $category = $this->category->getByName($row['tip']);
+            $transaction['category_id'] = $category->id;
+            $transaction['description'] = $row['opis'];
+            $transaction['price'] = !is_null($row['duguje']) ? $row['duguje'] : $row['potrazuje'];
+            $transaction['created_at'] = $row['datum'];
+            $transaction['updated_at'] = new \DateTime();
+
+            $transactions[] = $transaction;
+        }
+
+        Transaction::insert($transactions);
+    }
 }

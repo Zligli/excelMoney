@@ -57,14 +57,19 @@ class ImportController extends Controller
         $transactions = [];
 
         foreach ($this->sheet as $row) {
-            $category = $this->category->getByName($row['tip']);
-            $transaction['category_id'] = $category->id;
-            $transaction['description'] = $row['opis'];
-            $transaction['price'] = !is_null($row['duguje']) ? $row['duguje'] : $row['potrazuje'];
-            $transaction['created_at'] = $row['datum'];
-            $transaction['updated_at'] = new \DateTime();
+            try {
 
-            $transactions[] = $transaction;
+                $category = $this->category->getByName($row['tip']);
+                $transaction['category_id'] = $category->id;
+                $transaction['description'] = $row['opis'];
+                $transaction['price'] = !is_null($row['duguje']) ? $row['duguje'] : $row['potrazuje'];
+                $transaction['created_at'] = $row['datum'];
+                $transaction['updated_at'] = new \DateTime();
+
+                $transactions[] = $transaction;
+            }catch (\Exception $exception) {
+                dd($exception->getMessage(), $row);
+            }
         }
 
         Transaction::insert($transactions);

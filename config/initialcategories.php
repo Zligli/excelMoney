@@ -9,6 +9,7 @@ return [
         "type" => "cost",
         "main_name" => "kućni rashodi",
         "categories" => [
+            "kućni rashodi",
             "struja",
             "infostan",
             "telefon fix",
@@ -46,7 +47,7 @@ return [
             "doktor",
             "lekovi",
             "šišanje",
-            "ostalo zdravlje"
+            "ostalo zdrav"
         ]
     ],
     [
@@ -102,6 +103,7 @@ return [
         "type" => "income",
         "main_name" => "prihodi",
         "categories" => [
+            "plata",
             "plata bojana",
             "ostali prihodi",
             "plata gliso"

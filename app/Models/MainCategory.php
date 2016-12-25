@@ -10,7 +10,7 @@ class MainCategory extends Model
     protected $fillable = ['name'];
 
     protected $rules = [
-        'name' => 'required'
+        'name' => 'required|unique:main_categories'
     ];
 
 

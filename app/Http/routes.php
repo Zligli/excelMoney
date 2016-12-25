@@ -1,8 +1,8 @@
 <?php
 
-Route::get('/', function (){
-    echo "home";
-});
+Route::auth();
+
+Route::get('/', 'HomeController@index');
 
 /**-------------------*/
 /*  Initial IMPORT

@@ -17,7 +17,7 @@ class TransactionController extends CRUDController
 
     public function index()
     {
-        $transactions = $this->model->paginate();
+        $transactions = $this->model->get();
         return view('transactions.index', ['transactions' => $transactions]);
     }
 }

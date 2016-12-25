@@ -11,6 +11,7 @@ class CRUDController extends Controller
 
     public function __construct($model)
     {
+        $this->middleware('auth');
         $this->model = $model;
     }
 

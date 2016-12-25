@@ -105,5 +105,10 @@
             ],
             order: [[2, "desc"]]
         });
+        $('#date').datepicker({
+            clearBtn: true,
+            autoclose: true,
+            todayBtn: "linked"
+        });
     </script>
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Helpers\Helper;
 use App\ImportMoney;
 use App\Models\Category;
 use App\Models\MainCategory;
@@ -30,8 +31,10 @@ class ImportController extends Controller
         $this->importMainCategories();
         $this->importCategories();
         $this->importTransactions();
-        echo "importing done!*!*!*!*!*";
+        $this->modifyCatsAndMainCats();
 
+        $this->modifyCatsAndMainCats();
+        echo "importing done!*!*!*!*!*";
 
     }
 
@@ -90,5 +93,23 @@ class ImportController extends Controller
         }
 
         $this->transaction->insert($transactions);
+    }
+
+    protected function modifyCatsAndMainCats()
+    {
+        $mainCategories = $this->mainCategory->all();
+
+        foreach ($mainCategories as $mainCategory) {
+            $mainCategory->name = Helper::firstToUp($mainCategory->name);
+            $mainCategory->save();
+        }
+
+        $categories = $this->category->all();
+
+        foreach ($categories as $category) {
+            $category->name = Helper::firstToUp($category->name);
+            $category->save();
+        }
+
     }
 }

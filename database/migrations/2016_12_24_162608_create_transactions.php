@@ -18,6 +18,7 @@ class CreateTransactions extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('price');
             $table->text('description');
+            $table->timestamp('date');
             $table->timestamps();
         });
     }

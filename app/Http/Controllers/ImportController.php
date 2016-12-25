@@ -83,7 +83,8 @@ class ImportController extends Controller
                 $transaction['category_id'] = $category->id;
                 $transaction['description'] = $row['opis'];
                 $transaction['price'] = !is_null($row['duguje']) ? $row['duguje'] : $row['potrazuje'];
-                $transaction['created_at'] = $row['datum'];
+                $transaction['date'] = $row['datum'];
+                $transaction['created_at'] = new \DateTime();
                 $transaction['updated_at'] = new \DateTime();
 
                 $transactions[] = $transaction;

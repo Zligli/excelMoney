@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Http\Requests\Request;
+use Illuminate\Http\Request;
 
 class CRUDController extends Controller
 {

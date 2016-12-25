@@ -9,14 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    protected $fillable = ['created_at', 'price', 'description'];
+    protected $fillable = ['date', 'price', 'description', 'category_id'];
 
 
-    protected $appends = ['date', 'category_name', 'saldo', 'formated_price'];
+    protected $appends = ['formated_date', 'category_name', 'formated_price', 'type'];
 
     protected $rules = [
         'price' => 'required',
-        'description' => 'required'
+        'description' => 'required',
+        'category_id' => 'required'
     ];
 
     public function category()
@@ -24,9 +25,9 @@ class Transaction extends Model
         return $this->belongsTo('App\Models\Category');
     }
 
-    public function getDateAttribute()
+    public function getFormatedDateAttribute()
     {
-        $date = Carbon::parse($this->created_at);
+        $date = Carbon::parse($this->date);
 
         return $date->toDateString();
     }
@@ -36,30 +37,13 @@ class Transaction extends Model
         return $this->category->name;
     }
 
-    public function getSaldoAttribute()
-    {
-        $costs = $this->where('id', '<=', $this->id)->costs()->sum('price');
-        $incomes = $this->where('id', '<=', $this->id)->incomes()->sum('price');
-
-        return Helper::price($incomes - $costs);
-    }
-
     public function getFormatedPriceAttribute()
     {
         return Helper::price($this->price);
     }
 
-    public function scopeCosts($query)
+    public function getTypeAttribute()
     {
-        return $query->whereHas('category', function ($query) {
-            return $query->where('type', '=', 'cost');
-        });
-    }
-
-    public function scopeIncomes($query)
-    {
-        return $query->whereHas('category', function ($query) {
-            return $query->where('type', '=', 'income');
-        });
+        return $this->category->type;
     }
 }

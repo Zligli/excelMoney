@@ -9,7 +9,7 @@ class MainCategory extends Model
 {
     protected $fillable = ['name'];
 
-    protected $rules = [
+    public $rules = [
         'name' => 'required|unique:main_categories'
     ];
 
@@ -17,5 +17,10 @@ class MainCategory extends Model
     public function categories()
     {
         return $this->hasMany('App\Models\Category');
+    }
+
+    public function getForGroup()
+    {
+        return $this->categories()->lists('name', 'id');
     }
 }

@@ -27,11 +27,15 @@ class CRUDController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, $this->model->rules);
+
         return $this->model->create($request->all());
     }
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, $this->model->rules);
+
         return $this->model->find($id)->update($request->all());
     }
 

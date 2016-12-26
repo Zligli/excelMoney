@@ -14,7 +14,7 @@ class Transaction extends Model
 
     protected $appends = ['formated_date', 'category_name', 'formated_price', 'type'];
 
-    protected $rules = [
+    public $rules = [
         'price' => 'required',
         'description' => 'required',
         'category_id' => 'required'

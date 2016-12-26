@@ -15,7 +15,7 @@ class Category extends Model
 {
     protected $fillable = ['name', 'type', 'main_category_id'];
 
-    protected $rules = [
+    public $rules = [
         'name' => 'required|unique:categories',
         'type' => 'required|in:cost,income'
     ];

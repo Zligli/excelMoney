@@ -4,45 +4,74 @@ namespace App\Http\Controllers;
 
 
 use App\Helpers\Helper;
-use App\ImportMoney;
 use App\Models\Category;
 use App\Models\MainCategory;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ImportController extends Controller
 {
+    protected $error;
     protected $sheet;
     protected $category;
+    protected $importMoney;
     protected $transaction;
     protected $mainCategory;
     protected $initialCategories;
 
-    public function __construct(ImportMoney $importMoney, Category $category, MainCategory $mainCategory, Transaction $transaction)
+    public function __construct(Category $category, MainCategory $mainCategory, Transaction $transaction)
     {
-        $this->initialCategories = collect(config('initialcategories'));
-        $this->sheet = $importMoney->all();
+        $this->error = false;
         $this->category = $category;
-        $this->mainCategory = $mainCategory;
         $this->transaction = $transaction;
+        $this->mainCategory = $mainCategory;
+        $this->initialCategories = collect(config('initialcategories'));
     }
 
-    public function importAll()
+    public function index()
     {
+        return view('import.index');
+    }
+
+    public function importAll(Request $request)
+    {
+
+        $this->uploadFile($request);
         $this->importMainCategories();
         $this->importCategories();
         $this->importTransactions();
         $this->modifyCatsAndMainCats();
 
-        $this->modifyCatsAndMainCats();
-        echo "importing done!*!*!*!*!*";
+        if($this->error) {
+            return Redirect::to('import')->withErrors(['error' => $this->error]);
+        } else {
+        $request->session()->flash('success', 'Uspesno importovan excel file!');
+            return Redirect::to('import');
+        }
 
     }
 
+    public function uploadFile($request)
+    {
+        $this->validate($request, ['file' => 'required']);
+
+        if ($request->file('file')->isValid()) {
+            $file = $request->file('file');
+            $file->move('inportedExcel', 'importfile.xlsx');
+        }
+
+        $excel = Excel::load(public_path('inportedExcel\importfile.xlsx'));
+
+        $this->sheet = $excel->all();
+    }
 
     public function importMainCategories()
     {
         if ($this->mainCategory->first()) {
-            dd("Vec su upisane osnovne kategorije");
+           $this->error = "Vec su upisane osnovne kategorije";
+           return;
         }
         $this->initialCategories->transform(function ($item, $key) {
             $mainCategory = $this->mainCategory->create(['name' => $item['main_name']]);
@@ -56,7 +85,8 @@ class ImportController extends Controller
     public function importCategories()
     {
         if ($this->category->first()) {
-            dd("Vec su upisane kategorije");
+            $this->error = "Vec su upisane kategorije";
+            return;
         }
         $this->initialCategories->transform(function ($item, $key) {
             foreach ($item['categories'] as $category) {
@@ -72,7 +102,8 @@ class ImportController extends Controller
     {
 
         if ($this->transaction->first()) {
-            dd("Vec su upisane transakcije");
+            $this->error = "Vec su upisane transakcije";
+            return;
         }
         $transactions = [];
 

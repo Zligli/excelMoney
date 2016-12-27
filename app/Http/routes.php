@@ -7,7 +7,8 @@ Route::get('/', 'HomeController@index');
 /**-------------------*/
 /*  Initial IMPORT
 /**-------------------*/
-Route::get('import', "ImportController@importAll");
+Route::get('import', "ImportController@index");
+Route::post('import', "ImportController@importAll");
 
 /**-------------------*/
 /*  Transactions

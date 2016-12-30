@@ -21,6 +21,6 @@ class MainCategory extends Model
 
     public function getForGroup()
     {
-        return $this->categories()->lists('name', 'id');
+        return $this->categories()->pluck('name', 'id');
     }
 }

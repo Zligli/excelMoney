@@ -4,6 +4,8 @@
 namespace App\Helpers;
 
 
+use Carbon\Carbon;
+
 class Helper
 {
     public static function firstToUp($string)
@@ -16,4 +18,10 @@ class Helper
     {
         return number_format($price, 2);
     }
+
+    public static function dateToDB($date)
+    {
+        return Carbon::createFromFormat(config('custom.show_date'), $date);
+    }
+
 }

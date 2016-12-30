@@ -17,7 +17,8 @@ class Transaction extends Model
     public $rules = [
         'price' => 'required',
         'description' => 'required',
-        'category_id' => 'required'
+        'category_id' => 'required',
+        'date' => 'required|before:tomorrow'
     ];
 
     public function category()
@@ -29,7 +30,7 @@ class Transaction extends Model
     {
         $date = Carbon::parse($this->date);
 
-        return $date->toDateString();
+        return $date->format(config('custom.show_date'));
     }
 
     public function getCategoryNameAttribute()

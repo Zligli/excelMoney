@@ -21,6 +21,13 @@ class Transaction extends Model
         'date' => 'required|before:tomorrow'
     ];
 
+    public function getUpdateRulesAttribute()
+    {
+        $update_rules = [];
+
+        return array_merge($this->rules, $update_rules);
+    }
+
     public function category()
     {
         return $this->belongsTo('App\Models\Category');

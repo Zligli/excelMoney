@@ -8,14 +8,10 @@ use Illuminate\Http\Request;
 
 class CRUDController extends Controller
 {
-    private $model;
-    private $model_name;
 
-    public function __construct($model, $model_name)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->model = $model;
-        $this->model_name = $model_name;
     }
 
     public function index()
@@ -44,7 +40,7 @@ class CRUDController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->model->rules);
+        $this->validate($request, $this->model->update_rules);
         $data = $request->all();
 
         if (isset($data['date'])) {
@@ -60,7 +56,7 @@ class CRUDController extends Controller
     public function destroy($id)
     {
         $model = $this->model->find($id)->delete();
-        if(!$model) {
+        if (!$model) {
             //TODO
             return redirect()->back();
         }

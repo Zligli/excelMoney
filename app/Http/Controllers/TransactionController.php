@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 
-use App\Helpers\Helper;
-use App\Models\MainCategory;
 use App\Models\Transaction;
-use Illuminate\Http\Request;
+use App\Models\MainCategory;
 
 class TransactionController extends CRUDController
 {
@@ -19,7 +17,7 @@ class TransactionController extends CRUDController
         $this->model = $transaction;
         $this->model_name = "Transaction";
         $this->mainCategory = $mainCategory;
-        parent::__construct($this->model, $this->model_name);
+        parent::__construct();
     }
 
     public function index()
@@ -38,7 +36,7 @@ class TransactionController extends CRUDController
     public function edit($id)
     {
         $transaction = $this->model->find($id);
-        if(!$transaction) {
+        if (!$transaction) {
             //TODO
             return redirect()->back();
         }

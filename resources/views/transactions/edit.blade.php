@@ -7,7 +7,7 @@
             <div class="col-md-5 col-md-offset-1">
                 {!! Form::open(['method' => 'put', 'action' => ['TransactionController@update', $transaction->id], 'class' => 'form-horizontal']) !!}
                 <fieldset>
-                    <legend>Nov Trošak</legend>
+                    <legend>Izmeni Trošak</legend>
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             <ul>

@@ -14,6 +14,15 @@ class MainCategory extends Model
     ];
 
 
+    public function getUpdateRulesAttribute()
+    {
+        $update_rules = [
+            'name' => "required"
+        ];
+
+        return array_merge($this->rules, $update_rules);
+    }
+
     public function categories()
     {
         return $this->hasMany('App\Models\Category');

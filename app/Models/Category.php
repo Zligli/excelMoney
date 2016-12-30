@@ -20,6 +20,16 @@ class Category extends Model
         'type' => 'required|in:cost,income'
     ];
 
+
+    public function getUpdateRulesAttribute()
+    {
+        $update_rules = [
+            'name' => "required"
+        ];
+
+        return array_merge($this->rules, $update_rules);
+    }
+
     public function mainCategory()
     {
         return $this->belongsTo('App\Models\MainCategory');

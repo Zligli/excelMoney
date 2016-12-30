@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label for="date" class="col-lg-2 control-label">Ime</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="date" placeholder="Ime" type="text" name="name" value="{{ $main_category->name }}">
+                            <input class="form-control" placeholder="Ime" type="text" name="name" value="{{ $main_category->name }}">
                         </div>
                     </div>
                     <div class="form-group">

@@ -5,9 +5,9 @@
 
         <div class="row">
             <div class="col-md-5 col-md-offset-1">
-                {!! Form::open(['method' => 'post', 'action' => 'MainCategoryController@store', 'class' => 'form-horizontal']) !!}
+                {!! Form::open(['method' => 'put', 'action' => ['AccountController@update', $account->id], 'class' => 'form-horizontal']) !!}
                 <fieldset>
-                    <legend>Kreiraj glavnu kategoriju</legend>
+                    <legend>Izmeni račun</legend>
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             <ul>
@@ -27,7 +27,14 @@
                     <div class="form-group">
                         <label for="date" class="col-lg-2 control-label">Ime</label>
                         <div class="col-lg-10">
-                            <input class="form-control" placeholder="Ime" type="text" name="name">
+                            <input class="form-control" placeholder="Ime" type="text" name="name"
+                                   value="{{ $account->name }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="select" class="col-lg-2 control-label">Tip</label>
+                        <div class="col-lg-10">
+                            {!! Form::select('type', ['cash' => 'Keš', 'bank' => 'Banka'], $account->type, ['class' => "form-control"]) !!}
                         </div>
                     </div>
                     <div class="form-group">

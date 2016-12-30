@@ -48,7 +48,9 @@
                     </div>
                     <div class="form-group">
                         <label for="select" class="col-lg-2 control-label">Kategorija</label>
-                        {!! Form::select('category_id', $groupedCategories, $transaction->category->id, ['class' => "form-control",  'id '=> "select"]) !!}
+                        <div class="col-lg-10">
+                            {!! Form::select('category_id', $groupedCategories, $transaction->category->id, ['class' => "form-control",  'id '=> "select"]) !!}
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">

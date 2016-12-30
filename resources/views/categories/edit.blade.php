@@ -27,16 +27,21 @@
                     <div class="form-group">
                         <label for="date" class="col-lg-2 control-label">Ime</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="date" placeholder="Ime" type="text" name="name" value="{{ $category->name }}">
+                            <input class="form-control" placeholder="Ime" type="text" name="name"
+                                   value="{{ $category->name }}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="select" class="col-lg-2 control-label">Tip</label>
-                        {!! Form::select('type', ['cost' => 'Troškovi','income' => 'Prihodi'], $category->type, ['class' => "form-control"]) !!}
+                        <div class="col-lg-10">
+                            {!! Form::select('type', ['cost' => 'Troškovi','income' => 'Prihodi'], $category->type, ['class' => "form-control"]) !!}
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="select" class="col-lg-2 control-label">Glavna Kategorija</label>
-                        {!! Form::select('main_category_id', $main_categories, $category->mainCategory->id, ['class' => "form-control"]) !!}
+                        <div class="col-lg-10">
+                            {!! Form::select('main_category_id', $main_categories, $category->mainCategory->id, ['class' => "form-control"]) !!}
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">

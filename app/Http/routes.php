@@ -24,3 +24,13 @@ Route::resource('categories', "CategoryController");
 /*  Main Categories
 /**-------------------*/
 Route::resource('maincategories', "MainCategoryController");
+
+/**-------------------*/
+/*  Accounts
+/**-------------------*/
+Route::resource('accounts', "AccountController");
+
+/**-------------------*/
+/*  Balance
+/**-------------------*/
+Route::resource('balance', "BalanceController");

@@ -5,9 +5,9 @@
 
         <div class="row">
             <div class="col-md-5 col-md-offset-1">
-                {!! Form::open(['method' => 'post', 'action' => 'MainCategoryController@store', 'class' => 'form-horizontal']) !!}
+                {!! Form::open(['method' => 'post', 'action' => 'BalanceController@store', 'class' => 'form-horizontal']) !!}
                 <fieldset>
-                    <legend>Kreiraj glavnu kategoriju</legend>
+                    <legend>Unesi stanje</legend>
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             <ul>
@@ -25,10 +25,18 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <label for="date" class="col-lg-2 control-label">Ime</label>
+                        <label for="date" class="col-lg-2 control-label">Datum</label>
                         <div class="col-lg-10">
-                            <input class="form-control" placeholder="Ime" type="text" name="name">
+                            <input class="form-control" id="date" placeholder="Datum" type="text" name="date" required>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        @foreach($accounts as $account)
+                            <label for="select" class="col-lg-2 control-label">{{ $account->name }}</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" placeholder="Iznos" type="number" name="accounts[{{ $account->id }}][amount]" required>
+                            </div>
+                        @endforeach
                     </div>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
@@ -44,4 +52,11 @@
 @endsection
 @section('script')
     @parent
+    <script>
+        $('#date').datepicker({
+            clearBtn: true,
+            autoclose: true,
+            todayBtn: "linked"
+        });
+    </script>
 @endsection

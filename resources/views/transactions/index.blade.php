@@ -27,7 +27,8 @@
                     <div class="form-group">
                         <label for="date" class="col-lg-2 control-label">Datum</label>
                         <div class="col-lg-10">
-                            <input class="form-control" id="date" placeholder="Datum" type="date" name="date" data-date-end-date="0d">
+                            <input class="form-control" id="date" placeholder="Datum" type="date" name="date"
+                                   data-date-end-date="0d">
                         </div>
                     </div>
                     <div class="form-group">
@@ -45,7 +46,9 @@
                     </div>
                     <div class="form-group">
                         <label for="select" class="col-lg-2 control-label">Kategorija</label>
-                        {!! Form::select('category_id', $groupedCategories, null, ['class' => "form-control",  'id '=> "select"]) !!}
+                        <div class="col-lg-10">
+                            {!! Form::select('category_id', $groupedCategories, null, ['class' => "form-control",  'id '=> "select"]) !!}
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">

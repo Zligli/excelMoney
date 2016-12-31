@@ -2,28 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
-use Illuminate\Http\Request;
+use App\Models\MainCategory;
+use App\Models\Transaction;
 
-class HomeController extends Controller
+class HomeController extends CRUDController
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $model;
+    protected $model_name;
+    protected $mainCategory;
+
+    public function __construct(Transaction $transaction, MainCategory $mainCategory)
     {
-        $this->middleware('auth');
+        $this->model = $transaction;
+        $this->model_name = "Transaction";
+        $this->mainCategory = $mainCategory;
+        parent::__construct();
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('home');
+        $transactions = $this->model->get();
+        $mainCategories = $this->mainCategory->all();
+
+        $groupedCategories = [];
+        foreach ($mainCategories as $mainCategory) {
+            $groupedCategories[$mainCategory->name] = $mainCategory->getForGroup()->toArray();
+        }
+
+        return view('home', ['transactions' => $transactions, 'groupedCategories' => $groupedCategories]);
     }
 }

@@ -23,14 +23,8 @@ class TransactionController extends CRUDController
     public function index()
     {
         $transactions = $this->model->get();
-        $mainCategories = $this->mainCategory->all();
 
-        $groupedCategories = [];
-        foreach ($mainCategories as $mainCategory) {
-            $groupedCategories[$mainCategory->name] = $mainCategory->getForGroup()->toArray();
-        }
-
-        return view('transactions.index', ['transactions' => $transactions, 'groupedCategories' => $groupedCategories]);
+        return view('transactions.index', ['transactions' => $transactions]);
     }
 
     public function edit($id)

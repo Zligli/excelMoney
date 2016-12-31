@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Category;
-use App\Models\MainCategory;
 use App\Models\Transaction;
+use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Maatwebsite\Excel\Facades\Excel;
@@ -44,10 +44,10 @@ class ImportController extends Controller
         $this->importTransactions();
         $this->modifyCatsAndMainCats();
 
-        if($this->error) {
+        if ($this->error) {
             return Redirect::to('import')->withErrors(['error' => $this->error]);
         } else {
-        $request->session()->flash('success', 'Uspesno importovan excel file!');
+            $request->session()->flash('success', 'Uspesno importovan excel file!');
             return Redirect::to('import');
         }
 
@@ -70,8 +70,8 @@ class ImportController extends Controller
     public function importMainCategories()
     {
         if ($this->mainCategory->first()) {
-           $this->error = "Vec su upisane osnovne kategorije";
-           return;
+            $this->error = "Vec su upisane osnovne kategorije";
+            return;
         }
         $this->initialCategories->transform(function ($item, $key) {
             $mainCategory = $this->mainCategory->create(['name' => $item['main_name']]);
@@ -90,7 +90,11 @@ class ImportController extends Controller
         }
         $this->initialCategories->transform(function ($item, $key) {
             foreach ($item['categories'] as $category) {
-                $this->category->create(['name' => $category, 'main_category_id' => $item['main_id'], 'type' => $item['type']]);
+                $this->category->create([
+                    'name' => $category,
+                    'main_category_id' => $item['main_id'],
+                    'type' => $item['type']
+                ]);
             }
             return $item;
 
@@ -113,14 +117,15 @@ class ImportController extends Controller
                 $category = $this->category->getByName($row['tip']);
                 $transaction['category_id'] = $category->id;
                 $transaction['description'] = $row['opis'];
-                $transaction['price'] = !is_null($row['duguje']) ? $row['duguje'] : $row['potrazuje'];
+                $transaction['price'] = $this->castNumbers($row);
                 $transaction['date'] = $row['datum'];
                 $transaction['created_at'] = new \DateTime();
                 $transaction['updated_at'] = new \DateTime();
 
                 $transactions[] = $transaction;
             } catch (\Exception $exception) {
-                dd($exception->getMessage(), $row);
+                $this->error = "Greska prlikom upisa transakcije.";
+                return;
             }
         }
 
@@ -142,6 +147,11 @@ class ImportController extends Controller
             $category->name = Helper::firstToUp($category->name);
             $category->save();
         }
+    }
 
+    protected function castNumbers($row)
+    {
+        $number = round(!is_null($row['duguje']) ? $row['duguje'] : $row['potrazuje'], 2);
+        return $number;
     }
 }

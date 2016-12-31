@@ -15,6 +15,7 @@ class CreateBalanceTable extends Migration
         Schema::create('balance', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamp('date');
+            $table->string('amount_sum');
             $table->timestamps();
         });
     }

@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('transactions.table')
+    <div class="container">
+        @include('transactions.table')
+    </div>
 @endsection
 @section('script')
     @parent
-    @include('scripts.table')
+    @include('scripts.transactionstable')
 @endsection

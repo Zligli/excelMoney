@@ -7,7 +7,17 @@
             {data: 'formated_date'},
             {data: 'category_name'},
             {data: 'formated_price'},
-            {data: 'description'}
+            {data: 'description'},
+            {
+                data: function (item) {
+                    return "<a class='btn btn-warning btn-block' href='transactions/" + item.id +"/edit'><i class='fa fa-pencil'></i></a>";
+                }
+            },
+            {
+                data: function (item) {
+                    return "<span class='confirm btn btn-danger btn-block' id='" + item.id + "' data-type = 'items'> <i class='fa fa-trash'></i></span>";
+                }
+            }
         ],
         createdRow: function (row, data, dataIndex) {
             if (data['type'] == "cost") {
@@ -29,10 +39,5 @@
             }
         ],
         order: [[2, "desc"]]
-    });
-    $('#date').datepicker({
-        clearBtn: true,
-        autoclose: true,
-        todayBtn: "linked"
     });
 </script>

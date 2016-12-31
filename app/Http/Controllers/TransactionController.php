@@ -22,7 +22,7 @@ class TransactionController extends CRUDController
 
     public function index()
     {
-        $transactions = $this->model->get();
+        $transactions = $this->model->orderBy('date', 'desc')->paginate(10);
 
         return view('transactions.index', ['transactions' => $transactions]);
     }

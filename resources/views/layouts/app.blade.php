@@ -52,6 +52,31 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ action('TransactionController@index') }}">Transactions</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Categories <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ action('CategoryController@index') }}">Categories</a></li>
+                                <li><a href="{{ action('CategoryController@create') }}">Insert Category</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{{ action('MainCategoryController@index') }}">Main Categories</a></li>
+                                <li><a href="{{ action('MainCategoryController@create') }}">Insert Main Category</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Balance <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ action('BalanceController@index') }}">Daily Balances</a></li>
+                                <li><a href="{{ action('BalanceController@create') }}">Insert Balance</a></li>
+                                <li class="divider"></li>
+                                <li><a href="{{ action('AccountController@index') }}">Accounts</a></li>
+                                <li><a href="{{ action('AccountController@create') }}">Insert New Account</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>

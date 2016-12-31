@@ -21,7 +21,7 @@ class HomeController extends CRUDController
 
     public function index()
     {
-        $transactions = $this->model->get();
+        $transactions = $this->model->orderBy('date', 'desc')->paginate(10);
         $mainCategories = $this->mainCategory->all();
 
         $groupedCategories = [];

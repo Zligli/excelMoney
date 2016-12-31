@@ -25,25 +25,28 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <label for="date" class="col-lg-2 control-label">Datum</label>
-                        <div class="col-lg-10">
+                        <label for="date" class="col-lg-3 control-label">Datum</label>
+                        <div class="col-lg-9">
                             <input class="form-control" id="date" placeholder="Datum" type="text" name="date"
                                    value="{{ $balance->formated_date }}" required>
                         </div>
                     </div>
                     <div class="form-group">
                         @foreach($accounts as $account)
-                            <label for="select" class="col-lg-2 control-label">{{ $account->name }}</label>
-                            <div class="col-lg-10">
-                                <input class="form-control" placeholder="Iznos" type="number"
-                                       name="accounts[{{ $account->id }}][amount]"
-                                       value="{{ $balance->getAmountByAccountId($account->id) }}"
-                                       required>
+                            <label for="select" class="col-lg-3 control-label">{{ $account->name }}</label>
+                            <div class="col-lg-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">DIN</span>
+                                    <input class="form-control" placeholder="Iznos" type="number"
+                                           name="accounts[{{ $account->id }}][amount]"
+                                           value="{{ $balance->getAmountByAccountId($account->id) }}"
+                                           required>
+                                </div>
                             </div>
                         @endforeach
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
+                        <div class="col-lg-9 col-lg-offset-3">
                             <a href="{{ url()->previous() }}" class="btn btn-default">Cancel</a>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>

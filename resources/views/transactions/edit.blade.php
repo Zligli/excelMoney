@@ -25,35 +25,38 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <label for="date" class="col-lg-2 control-label">Datum</label>
-                        <div class="col-lg-10">
+                        <label for="date" class="col-lg-3 control-label">Datum</label>
+                        <div class="col-lg-9">
                             <input class="form-control" id="date" placeholder="Datum" type="date" name="date"
                                    data-date-end-date="0d" value="{{ $transaction->formated_date }}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="price" class="col-lg-2 control-label">Iznos</label>
-                        <div class="col-lg-10">
-                            <input class="form-control" id="price" placeholder="Iznos" type="number" name="price"
-                                   value="{{ $transaction->price }}">
+                        <label for="price" class="col-lg-3 control-label">Iznos</label>
+                        <div class="col-lg-9">
+                            <div class="input-group">
+                                <span class="input-group-addon">DIN</span>
+                                <input class="form-control" id="price" placeholder="Iznos" type="number" name="price"
+                                       value="{{ $transaction->price }}">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description" class="col-lg-2 control-label">Opis</label>
-                        <div class="col-lg-10">
+                        <label for="description" class="col-lg-3 control-label">Opis</label>
+                        <div class="col-lg-9">
                             <textarea class="form-control" rows="3" id="description"
                                       name="description">{{ $transaction->description }}</textarea>
                             <span class="help-block">Duži opis ostvarene transakcije.</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="select" class="col-lg-2 control-label">Kategorija</label>
-                        <div class="col-lg-10">
+                        <label for="select" class="col-lg-3 control-label">Kategorija</label>
+                        <div class="col-lg-9">
                             {!! Form::select('category_id', $groupedCategories, $transaction->category->id, ['class' => "form-control",  'id '=> "select"]) !!}
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
+                        <div class="col-lg-9 col-lg-offset-3">
                             <a href="{{ url()->previous() }}" class="btn btn-default">Cancel</a>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
@@ -66,11 +69,5 @@
 @endsection
 @section('script')
     @parent
-    <script>
-        $('#date').datepicker({
-            clearBtn: true,
-            autoclose: true,
-            todayBtn: "linked"
-        });
-    </script>
+    @include('scripts.datepicker')
 @endsection

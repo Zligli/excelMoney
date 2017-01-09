@@ -4,32 +4,32 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <legend>Glavne Kategorije</legend>
+                <legend>Računi</legend>
                 <table class="table table-striped table-hover ">
                     <thead>
                     <tr>
-                        <th>Ime</th>
-                        <th>Kategorije</th>
+                        <th>Naziv</th>
+                        <th>Tip</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($mainCategories as $mainCategory)
+                    @foreach($accounts as $account)
                         <tr>
-                            <td>{{ $mainCategory->name }}</td>
-                            <td>{{ $mainCategory->nameList() }}</td>
+                            <td>{{ $account->name }}</td>
+                            <td>@if($account->type == "bank") Banka @else Keš @endif</td>
                             <td><a class='btn btn-warning btn-block'
-                                   href='{{ action("MainCategoryController@edit", ["id" => $mainCategory->id]) }}'><i
+                                   href='{{ action("AccountController@edit", ["id" => $account->id]) }}'><i
                                             class='fa fa-pencil'></i></a></td>
                             <td><a class='btn btn-danger btn-block'
-                                   href='{{ action("MainCategoryController@destroy", ["id" => $mainCategory->id]) }}'><i
+                                   href='{{ action("AccountController@destroy", ["id" => $account->id]) }}'><i
                                             class='fa fa-trash'></i></a></td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-                {{ $mainCategories->links() }}
+                {{ $accounts->links() }}
             </div>
         </div>
     </div>

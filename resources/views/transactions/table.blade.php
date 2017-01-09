@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <legend>Transakcije</legend>
-        <table class="table table-striped table-hover " id="dataTable">
+        <table class="table table-striped table-hover ">
             <thead>
             <tr>
                 <th>Datum</th>

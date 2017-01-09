@@ -18,6 +18,13 @@ class AccountController extends CRUDController
         parent::__construct();
     }
 
+    public function index()
+    {
+        $accounts = $this->model->paginate(10);
+
+        return view('accounts.index', ['accounts' => $accounts]);
+    }
+
     public function create()
     {
 

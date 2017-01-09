@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Helper;
 use App\Models\Account;
 use App\Models\Balance;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BalanceController extends CRUDController
@@ -22,12 +23,20 @@ class BalanceController extends CRUDController
         parent::__construct();
     }
 
+    public function index()
+    {
+        $balances = $this->model->orderBy('date', 'desc')->paginate(10);
+
+        return view('balance.index', ['balances' => $balances]);
+    }
+
     public function create()
     {
-        $balance = $this->model->all();
+        $balance = $this->model->orderBy('date', 'desc')->first();
         $accounts = $this->account->all();
+        $currentDate = Carbon::now()->format(config('custom.show_date'));
 
-        return view('balance.create', ['balance' => $balance, 'accounts' => $accounts]);
+        return view('balance.create', ['balance' => $balance, 'accounts' => $accounts, 'currentDate' => $currentDate]);
     }
 
     public function edit($id)

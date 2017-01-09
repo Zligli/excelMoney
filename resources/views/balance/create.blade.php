@@ -3,8 +3,15 @@
 @section('content')
     <div class="container">
 
-        <div class="row">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has($msg))
+                <p class="alert alert-{{ $msg }}">{{ Session::get($msg) }}
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                </p>
+            @endif
+        @endforeach
 
+        <div class="row">
             <div class="col-md-5 col-md-offset-1">
                 @include('balance.form')
             </div>

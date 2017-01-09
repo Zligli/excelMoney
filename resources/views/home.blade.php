@@ -2,6 +2,15 @@
 
 @section('content')
     <div class="container">
+
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has($msg))
+                <p class="alert alert-{{ $msg }}">{{ Session::get($msg) }}
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                </p>
+            @endif
+        @endforeach
+
         <div class="row">
             <div class="col-md-5">
                 {!! Form::open(['method' => 'post', 'action' => 'TransactionController@store', 'class' => 'form-horizontal', 'id' => 'transaction']) !!}

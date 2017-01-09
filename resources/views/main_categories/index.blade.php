@@ -23,8 +23,11 @@
                                href='{{ action("MainCategoryController@edit", ["id" => $mainCategory->id]) }}'>
                                 <i class='fa fa-pencil'></i></a></td>
                         <td>
-                            {!! Form::open([ 'method'  => 'delete', 'action' => ['MainCategoryController@destroy', $mainCategory->id ] ]) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger  btn-block delete']) !!}
+                            {!! Form::open([ 'method'  => 'delete', 'action' => ['MainCategoryController@destroy', $mainCategory->id], 'id' => 'delete_'.$mainCategory->id]) !!}
+                            <button type="button" class="btn btn-danger btn-block delete" data-toggle="modal"
+                                    data-target="#modal-delete" data-id="{{ $mainCategory->id }}"><i
+                                        class="fa fa-trash"></i>
+                            </button>
                             {!! Form::close() !!}
                         </td>
                     </tr>
@@ -35,11 +38,14 @@
         </div>
     </div>
 
+    @include('partials.modaldelete')
+
 @endsection
 
 @section('script')
     @parent
     @include('scripts.deleteconfirm')
+
 @endsection
 
 

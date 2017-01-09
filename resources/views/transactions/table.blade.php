@@ -23,8 +23,10 @@
                            href='{{ action("TransactionController@edit", ["id" => $transaction->id]) }}'><i
                                     class='fa fa-pencil'></i></a></td>
                     <td>
-                        {!! Form::open([ 'method'  => 'delete', 'action' => ['TransactionController@destroy', $transaction->id ] ]) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger  btn-block delete']) !!}
+                        {!! Form::open([ 'method'  => 'delete', 'action' => ['TransactionController@destroy', $transaction->id], 'id' => 'delete_'.$transaction->id]) !!}
+                        <button type="button" class="btn btn-danger btn-block delete" data-toggle="modal"
+                                data-target="#modal-delete" data-id="{{ $transaction->id }}"><i class="fa fa-trash"></i>
+                        </button>
                         {!! Form::close() !!}
                     </td>
                 </tr>

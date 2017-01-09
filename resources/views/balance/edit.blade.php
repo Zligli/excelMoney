@@ -43,11 +43,6 @@
 
 @section('script')
     @parent
-    <script>
-        $('#date').datepicker({
-            clearBtn: true,
-            autoclose: true,
-            todayBtn: "linked"
-        });
-    </script>
+    @include('scripts.datepicker')
+
 @endsection

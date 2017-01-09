@@ -50,6 +50,7 @@
     </div>
 
     @include('transactions.table')
+    @include('partials.modaldelete')
 
 @endsection
 

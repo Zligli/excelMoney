@@ -23,9 +23,12 @@
                                href='{{ action("AccountController@edit", ["id" => $account->id]) }}'><i
                                         class='fa fa-pencil'></i></a></td>
                         <td>
-                            {!! Form::open([ 'method'  => 'delete', 'action' => ['AccountController@destroy', $account->id ] ]) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger  btn-block delete']) !!}
+                            {!! Form::open([ 'method'  => 'delete', 'action' => ['AccountController@destroy', $account->id], 'id' => 'delete_'.$account->id]) !!}
+                            <button type="button" class="btn btn-danger btn-block delete" data-toggle="modal"
+                                    data-target="#modal-delete" data-id="{{ $account->id }}"><i class="fa fa-trash"></i>
+                            </button>
                             {!! Form::close() !!}
+
                         </td>
                     </tr>
                 @endforeach
@@ -34,6 +37,8 @@
             {{ $accounts->links() }}
         </div>
     </div>
+
+    @include('partials.modaldelete')
 
 @endsection
 

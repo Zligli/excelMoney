@@ -65,32 +65,19 @@ class BalanceController extends CRUDController
             $data['amount_sum'] = array_sum(array_column($accounts, 'amount'));
         }
 
-        $balance = $this->model->create($data);
-        $balance->accounts()->sync($accounts);
+        $dateStartOfDay = $data['date']->startOfDay()->toDateTimeString();
+        $dateEndOfDay = $data['date']->endOfDay()->toDateTimeString();
 
-        return redirect()->back()->with('success', "{$this->model_name} successfully added!");
-    }
+        $balance = $this->model->whereBetween('date', [$dateStartOfDay, $dateEndOfDay])->first();
 
-    public function update(Request $request, $id)
-    {
-
-        $this->validate($request, $this->model->rules);
-        $data = $request->all();
-
-        if (isset($data['date'])) {
-            $data['date'] = Helper::dateToDB($data['date']);
+        if ($balance) {
+            $balance->update($data);
+        } else {
+            $balance = $this->model->create($data);
         }
-        $accounts = [];
-        if (isset($data['accounts'])) {
-            $accounts = $data['accounts'];;
-            $data['amount_sum'] = array_sum(array_column($accounts, 'amount'));
-        }
-
-        $balance = $this->model->find($id);
-        $balance->update($data);
 
         $balance->accounts()->sync($accounts);
 
-        return redirect()->back()->with('success', "{$this->model_name} successfully updated!");
+        return redirect()->back()->with('success', "{$this->model_name} successfully changed!");
     }
 }

@@ -29,6 +29,7 @@
 
 @section('script')
     @parent
+
 @endsection
 
 

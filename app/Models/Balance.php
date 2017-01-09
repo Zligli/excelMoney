@@ -15,7 +15,7 @@ class Balance extends Model
     protected $appends = ['formated_date'];
 
     public $rules = [
-        'date' => 'required'
+        'date' => 'required|before:tomorrow'
     ];
 
 

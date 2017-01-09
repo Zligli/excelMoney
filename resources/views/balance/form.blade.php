@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="form-group">
-    @foreach($accounts as $account)
+        @foreach($accounts as $account)
             <label for="select" class="col-lg-3 control-label">{{ $account->name }}</label>
             <div class="col-lg-9">
                 <div class="input-group @if($errors->first('accounts['. $account->id .'][amount]')) has-error @endif">
@@ -23,7 +23,6 @@
     </div>
     <div class="form-group">
         <div class="col-lg-9 col-lg-offset-3">
-            <a href="{{ url()->previous() }}" class="btn btn-default">Cancel</a>
             <button type="submit" class="btn btn-primary" form="balance">Submit</button>
         </div>
     </div>

@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        @include('transactions.table')
-    </div>
+
+    @include('transactions.table')
+
 @endsection
+
 @section('script')
     @parent
 @endsection

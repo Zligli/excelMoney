@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @foreach($accounts as $account)
+                    @forelse($accounts as $account)
                         <label for="select" class="col-lg-3 control-label">{{ $account->name }}</label>
                         <div class="col-lg-9">
                             <div class="input-group @if($errors->first('accounts['. $account->id . '][amount]')) has-error @endif">
@@ -26,7 +26,7 @@
                                        required>
                             </div>
                         </div>
-                    @endforeach
+                    @endforelse
                 </div>
                 <div class="form-group">
                     <div class="col-lg-9 col-lg-offset-3">

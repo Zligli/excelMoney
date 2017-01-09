@@ -19,6 +19,7 @@ class CreateTransactions extends Migration
             $table->string('price');
             $table->text('description');
             $table->timestamp('date');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

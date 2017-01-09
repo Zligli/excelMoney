@@ -15,6 +15,7 @@ class CreateMainCategories extends Migration
         Schema::create('main_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

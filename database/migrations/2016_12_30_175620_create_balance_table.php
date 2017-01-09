@@ -16,6 +16,7 @@ class CreateBalanceTable extends Migration
             $table->increments('id');
             $table->timestamp('date');
             $table->string('amount_sum');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -9,17 +9,23 @@
         </div>
     </div>
     <div class="form-group">
-        @foreach($accounts as $account)
+        @forelse($accounts as $account)
             <label for="select" class="col-lg-3 control-label">{{ $account->name }}</label>
             <div class="col-lg-9">
                 <div class="input-group @if($errors->first('accounts['. $account->id .'][amount]')) has-error @endif">
                     <span class="input-group-addon">DIN</span>
                     <input class="form-control" placeholder="Iznos" type="number"
                            name="accounts[{{ $account->id }}][amount]"
-                           value="{{ $balance->getAmountByAccountId($account->id) }}" required>
+                           value="@if($balance) {{ $balance->getAmountByAccountId($account->id) }}@else  @endif"
+                           required>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <label for="date" class="col-lg-3 control-label">Accounts</label>
+            <div class="col-lg-9">
+                No active accounts
+            </div>
+        @endforelse
     </div>
     <div class="form-group">
         <div class="col-lg-9 col-lg-offset-3">

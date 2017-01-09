@@ -4,16 +4,20 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = ['name', 'type', 'main_category_id'];
+
+    protected $dates = ['deleted_at'];
 
     public $rules = [
         'name' => 'required|unique:categories',
         'type' => 'required|in:cost,income'
     ];
-
 
     public function getUpdateRulesAttribute()
     {

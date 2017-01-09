@@ -6,13 +6,17 @@ namespace App\Models;
 use App\Helpers\Helper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaction extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = ['date', 'price', 'description', 'category_id'];
 
-
     protected $appends = ['formated_date', 'category_name', 'formated_price', 'type'];
+
+    protected $dates = ['deleted_at'];
 
     public $rules = [
         'price' => 'required',
@@ -30,7 +34,7 @@ class Transaction extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo('App\Models\Category')->withTrashed();
     }
 
     public function getFormatedDateAttribute()

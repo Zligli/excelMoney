@@ -5,19 +5,23 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Balance extends Model
 {
+    use SoftDeletes;
+
     protected $table = "balance";
 
     protected $fillable = ['amount_sum', 'date'];
 
     protected $appends = ['formated_date'];
 
+    protected $dates = ['deleted_at'];
+
     public $rules = [
         'date' => 'required|before:tomorrow'
     ];
-
 
     public function getUpdateRulesAttribute()
     {

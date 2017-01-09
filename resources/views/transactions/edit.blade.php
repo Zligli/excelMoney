@@ -20,7 +20,7 @@
                         <div class="input-group">
                             <span class="input-group-addon">DIN</span>
                             <input class="form-control" id="price" placeholder="Iznos" type="number" name="price"
-                                   value="{{ $transaction->price }}">
+                                   value="{{ $transaction->price }}" step="any">
                         </div>
                     </div>
                 </div>

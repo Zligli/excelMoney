@@ -17,7 +17,7 @@
                     <input class="form-control" placeholder="Iznos" type="number"
                            name="accounts[{{ $account->id }}][amount]"
                            value="@if($balance){{ $balance->getAmountByAccountId($account->id) }}@else  @endif"
-                           required>
+                           required step="any">
                 </div>
             </div>
         @empty

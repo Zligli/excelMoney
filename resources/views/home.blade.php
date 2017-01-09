@@ -21,7 +21,7 @@
                     <div class="col-lg-9">
                         <div class="input-group">
                             <span class="input-group-addon">DIN</span>
-                            <input class="form-control" id="price" placeholder="Iznos" type="number" name="price">
+                            <input class="form-control" id="price" placeholder="Iznos" type="number" name="price" step="any">
                         </div>
                     </div>
                 </div>

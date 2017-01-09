@@ -8,30 +8,14 @@
                 {!! Form::open(['method' => 'put', 'action' => ['TransactionController@update', $transaction->id], 'class' => 'form-horizontal']) !!}
                 <fieldset>
                     <legend>Izmeni Trošak</legend>
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (Session::has('success'))
-                        <div class="alert alert-success">
-                            <ul>
-                                <li>{{ Session::get('success') }}</li>
-                            </ul>
-                        </div>
-                    @endif
-                    <div class="form-group">
+                    <div class="form-group @if($errors->first('date')) has-error @endif">
                         <label for="date" class="col-lg-3 control-label">Datum</label>
                         <div class="col-lg-9">
                             <input class="form-control" id="date" placeholder="Datum" type="date" name="date"
                                    data-date-end-date="0d" value="{{ $transaction->formated_date }}">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group @if($errors->first('price')) has-error @endif">
                         <label for="price" class="col-lg-3 control-label">Iznos</label>
                         <div class="col-lg-9">
                             <div class="input-group">
@@ -41,7 +25,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group @if($errors->first('description')) has-error @endif">
                         <label for="description" class="col-lg-3 control-label">Opis</label>
                         <div class="col-lg-9">
                             <textarea class="form-control" rows="3" id="description"
@@ -49,7 +33,7 @@
                             <span class="help-block">Duži opis ostvarene transakcije.</span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group @if($errors->first('category_id')) has-error @endif">
                         <label for="select" class="col-lg-3 control-label">Kategorija</label>
                         <div class="col-lg-9">
                             {!! Form::select('category_id', $groupedCategories, $transaction->category->id, ['class' => "form-control",  'id '=> "select"]) !!}

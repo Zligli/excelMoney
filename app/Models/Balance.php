@@ -40,6 +40,8 @@ class Balance extends Model
 
     public function getAmountByAccountId($id)
     {
-        return $this->accounts->find($id)->pivot->amount;
+        $account = $this->accounts->find($id);
+
+        return $account ? $account->pivot->amount : 0;
     }
 }

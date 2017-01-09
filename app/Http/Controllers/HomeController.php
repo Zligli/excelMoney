@@ -16,8 +16,12 @@ class HomeController extends CRUDController
     protected $model_name;
     protected $mainCategory;
 
-    public function __construct(Transaction $transaction, MainCategory $mainCategory, Account $account, Balance $balance)
-    {
+    public function __construct(
+        Transaction $transaction,
+        MainCategory $mainCategory,
+        Account $account,
+        Balance $balance
+    ) {
         $this->model = $transaction;
         $this->account = $account;
         $this->balance = $balance;

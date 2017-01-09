@@ -8,23 +8,7 @@
                 {!! Form::open(['method' => 'put', 'action' => ['MainCategoryController@update', $main_category->id], 'class' => 'form-horizontal']) !!}
                 <fieldset>
                     <legend>Izmeni glavnu kategoriju</legend>
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if (Session::has('success'))
-                        <div class="alert alert-success">
-                            <ul>
-                                <li>{{ Session::get('success') }}</li>
-                            </ul>
-                        </div>
-                    @endif
-                    <div class="form-group">
+                    <div class="form-group @if($errors->first('name')) has-error @endif">
                         <label for="date" class="col-lg-3 control-label">Ime</label>
                         <div class="col-lg-9">
                             <input class="form-control" placeholder="Ime" type="text" name="name"

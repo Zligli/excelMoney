@@ -54,7 +54,6 @@ class BalanceController extends CRUDController
 
     public function store(Request $request)
     {
-
         $this->validate($request, $this->model->rules);
         $data = $request->all();
 
@@ -62,9 +61,9 @@ class BalanceController extends CRUDController
             $data['date'] = Helper::dateToDB($data['date']);
         }
         $accounts = [];
-        if(isset($data['accounts'])) {
+        if (isset($data['accounts'])) {
             $accounts = $data['accounts'];;
-            $data['amount_sum'] = array_sum(array_column($accounts,'amount'));
+            $data['amount_sum'] = array_sum(array_column($accounts, 'amount'));
         }
 
         $balance = $this->model->create($data);
@@ -83,16 +82,15 @@ class BalanceController extends CRUDController
             $data['date'] = Helper::dateToDB($data['date']);
         }
         $accounts = [];
-        if(isset($data['accounts'])) {
+        if (isset($data['accounts'])) {
             $accounts = $data['accounts'];;
-            $data['amount_sum'] = array_sum(array_column($accounts,'amount'));
+            $data['amount_sum'] = array_sum(array_column($accounts, 'amount'));
         }
 
         $balance = $this->model->find($id);
         $balance->update($data);
 
         $balance->accounts()->sync($accounts);
-
 
         return redirect()->back()->with('success', "{$this->model_name} successfully updated!");
     }

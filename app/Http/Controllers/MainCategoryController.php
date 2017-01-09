@@ -18,6 +18,13 @@ class MainCategoryController extends CRUDController
         parent::__construct();
     }
 
+    public function index()
+    {
+        $mainCategories = $this->model->paginate(10);
+
+        return view('main_categories.index', ['mainCategories' => $mainCategories]);
+    }
+
     public function create()
     {
 

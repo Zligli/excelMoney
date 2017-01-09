@@ -6,6 +6,7 @@
             <tr>
                 <th>Datum</th>
                 <th>Cena</th>
+                <th>Kategorija</th>
                 <th>Opis</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -16,9 +17,10 @@
                 <tr>
                     <td>{{ $transaction->formated_date }}</td>
                     <td class="@if($transaction->category->type == 'cost') text-danger @else text-success @endif text-right"> {{ $transaction->formated_price }}</td>
+                    <td>{{ $transaction->category->name }}</td>
                     <td>{{ $transaction->description }}</td>
                     <td><a class='btn btn-warning btn-block'
-                           href='{{ action("TransactionController@update", ["id" => $transaction->id]) }}'><i
+                           href='{{ action("TransactionController@edit", ["id" => $transaction->id]) }}'><i
                                     class='fa fa-pencil'></i></a></td>
                     <td><a class='btn btn-danger btn-block'
                            href='{{ action("TransactionController@destroy", ["id" => $transaction->id]) }}'><i
@@ -27,6 +29,6 @@
             @endforeach
             </tbody>
         </table>
-        {{ $transactions->appends(['sort' => 'description'])->links() }}
+        {{ $transactions->links() }}
     </div>
 </div>

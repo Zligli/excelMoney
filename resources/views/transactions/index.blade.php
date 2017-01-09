@@ -7,5 +7,4 @@
 @endsection
 @section('script')
     @parent
-    {{--@include('scripts.transactionstable')--}}
 @endsection

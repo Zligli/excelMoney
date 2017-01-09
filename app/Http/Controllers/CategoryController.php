@@ -22,7 +22,7 @@ class CategoryController extends CRUDController
 
     public function index()
     {
-        $categories = $this->model->all();
+        $categories = $this->model->paginate(10);
 
         return view('categories.index', ['categories' => $categories]);
     }

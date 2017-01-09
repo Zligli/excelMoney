@@ -32,4 +32,9 @@ class MainCategory extends Model
     {
         return $this->categories()->pluck('name', 'id');
     }
+
+    public function nameList()
+    {
+        return implode(', ', $this->categories()->pluck('name')->toArray());
+    }
 }

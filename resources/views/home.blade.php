@@ -66,6 +66,5 @@
 @endsection
 @section('script')
     @parent
-    {{--@include('scripts.transactionstable')--}}
     @include('scripts.datepicker')
 @endsection

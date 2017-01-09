@@ -15,7 +15,7 @@ class Account extends Model
     protected $dates = ['deleted_at'];
 
     public $rules = [
-        'name' => 'required',
+        'name' => 'required|unique:accounts',
         'type' => 'required|in:cash,bank'
     ];
 

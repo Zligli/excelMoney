@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Account;
 use App\Models\Balance;
-use App\Models\MainCategory;
 use App\Models\Transaction;
-use Carbon\Carbon;
+use App\Models\MainCategory;
 
 class HomeController extends CRUDController
 {
@@ -17,14 +17,14 @@ class HomeController extends CRUDController
     protected $mainCategory;
 
     public function __construct(
-        Transaction $transaction,
-        MainCategory $mainCategory,
         Account $account,
-        Balance $balance
+        Balance $balance,
+        Transaction $transaction,
+        MainCategory $mainCategory
     ) {
-        $this->model = $transaction;
         $this->account = $account;
         $this->balance = $balance;
+        $this->model = $transaction;
         $this->model_name = "Transaction";
         $this->mainCategory = $mainCategory;
         parent::__construct();
@@ -33,9 +33,9 @@ class HomeController extends CRUDController
     public function index()
     {
         $transactions = $this->model->orderBy('date', 'desc')->paginate(10);
+
         $mainCategories = $this->mainCategory->all();
 
-        $balance = $this->balance->orderBy('date', 'desc')->first();
         $accounts = $this->account->all();
         $currentDate = Carbon::now()->format(config('custom.show_date'));
 
@@ -44,12 +44,38 @@ class HomeController extends CRUDController
             $groupedCategories[$mainCategory->name] = $mainCategory->getForGroup()->toArray();
         }
 
+        $balance = $this->balance->orderBy('date', 'desc')->first();
+        $bookBalance = $this->bookBalance();
+        $balanceWarning = $this->checkBalance($bookBalance, $balance);
+
         return view('home', [
-            'transactions' => $transactions,
-            'groupedCategories' => $groupedCategories,
             'balance' => $balance,
             'accounts' => $accounts,
-            'currentDate' => $currentDate
+            'bookBalance' => $bookBalance,
+            'currentDate' => $currentDate,
+            'transactions' => $transactions,
+            'balanceWarning' => $balanceWarning,
+            'groupedCategories' => $groupedCategories
         ]);
+    }
+
+    public function bookBalance()
+    {
+        $income = $this->model->with('category')->whereHas('category', function ($query) {
+            $query->where('type', 'income');
+        })->sum('price');
+
+        $costs = $this->model->with('category')->whereHas('category', function ($query) {
+            $query->where('type', 'cost');
+        })->sum('price');
+
+        return $income - $costs;
+    }
+
+    public function checkBalance($bookBalance, $balance)
+    {
+        $difference = abs($bookBalance - $balance->amount_sum);
+
+        return $difference > config('custom.balance_diff');
     }
 }

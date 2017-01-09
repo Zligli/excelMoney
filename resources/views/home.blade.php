@@ -2,6 +2,8 @@
 
 @section('content')
 
+    @include('transactions.balancenotification', ['balanceWarning' => $balanceWarning, 'balance' => $balance, 'bookBalance' => $bookBalance])
+
     <div class="row">
         <div class="col-md-5">
             {!! Form::open(['method' => 'post', 'action' => 'TransactionController@store', 'class' => 'form-horizontal', 'id' => 'transaction']) !!}

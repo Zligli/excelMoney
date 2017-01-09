@@ -16,7 +16,7 @@
                     <span class="input-group-addon">DIN</span>
                     <input class="form-control" placeholder="Iznos" type="number"
                            name="accounts[{{ $account->id }}][amount]"
-                           value="@if($balance) {{ $balance->getAmountByAccountId($account->id) }}@else  @endif"
+                           value="@if($balance){{ $balance->getAmountByAccountId($account->id) }}@else  @endif"
                            required>
                 </div>
             </div>

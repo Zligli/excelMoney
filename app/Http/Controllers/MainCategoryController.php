@@ -35,8 +35,7 @@ class MainCategoryController extends CRUDController
     {
         $main_category = $this->model->find($id);
         if (!$main_category) {
-            //TODO
-            return redirect()->back();
+            return redirect()->back()->with('danger', "There was an error updating!");
         }
 
         return view('main_categories.edit', ['main_category' => $main_category]);

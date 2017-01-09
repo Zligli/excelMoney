@@ -57,8 +57,7 @@ class CRUDController extends Controller
     {
         $model = $this->model->find($id)->delete();
         if (!$model) {
-            //TODO
-            return redirect()->back();
+            return redirect()->back()->with('danger', "There was an error deleting!");
         }
         return redirect()->back()->with('success', "{$this->model_name} successfully deleted!");
     }

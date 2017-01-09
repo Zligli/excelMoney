@@ -43,8 +43,7 @@ class BalanceController extends CRUDController
     {
         $balance = $this->model->find($id);
         if (!$balance) {
-            //TODO
-            return redirect()->back();
+            return redirect()->back()->with('danger', "There was an error updating!");
         }
 
         $accounts = $this->account->all();

@@ -31,8 +31,7 @@ class TransactionController extends CRUDController
     {
         $transaction = $this->model->find($id);
         if (!$transaction) {
-            //TODO
-            return redirect()->back();
+            return redirect()->back()->with('danger', "There was an error updating!");
         }
 
         $mainCategories = $this->mainCategory->all();

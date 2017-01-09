@@ -35,8 +35,7 @@ class AccountController extends CRUDController
     {
         $account = $this->model->find($id);
         if (!$account) {
-            //TODO
-            return redirect()->back();
+            return redirect()->back()->with('danger', "There was an error updating!");
         }
 
         return view('accounts.edit', ['account' => $account]);

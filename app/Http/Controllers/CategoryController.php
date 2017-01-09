@@ -38,8 +38,7 @@ class CategoryController extends CRUDController
     {
         $category = $this->model->find($id);
         if (!$category) {
-            //TODO
-            return redirect()->back();
+            return redirect()->back()->with('danger', "There was an error updating!");
         }
         $main_categories = $this->mainCategory->pluck('name', 'id');
 

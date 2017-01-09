@@ -16,7 +16,7 @@
                 @foreach($balances as $balance)
                     <tr>
                         <td>{{ $balance->formated_date }}</td>
-                        <td>{{ $balance->amount_sum }} RSD</td>
+                        <td>{{ Helper::price($balance->amount_sum) }} RSD</td>
                     </tr>
                 @endforeach
                 </tbody>

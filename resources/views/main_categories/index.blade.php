@@ -22,9 +22,11 @@
                         <td><a class='btn btn-warning btn-block'
                                href='{{ action("MainCategoryController@edit", ["id" => $mainCategory->id]) }}'>
                                 <i class='fa fa-pencil'></i></a></td>
-                        <td><a class='btn btn-danger btn-block'
-                               href='{{ action("MainCategoryController@destroy", ["id" => $mainCategory->id]) }}'>
-                                <i class='fa fa-trash'></i></a></td>
+                        <td>
+                            {!! Form::open([ 'method'  => 'delete', 'action' => ['MainCategoryController@destroy', $mainCategory->id ] ]) !!}
+                            {!! Form::submit('Delete', ['class' => 'btn btn-danger  btn-block delete']) !!}
+                            {!! Form::close() !!}
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -37,6 +39,7 @@
 
 @section('script')
     @parent
+    @include('scripts.deleteconfirm')
 @endsection
 
 

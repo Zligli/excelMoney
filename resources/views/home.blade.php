@@ -56,5 +56,6 @@
 @section('script')
     @parent
     @include('scripts.datepicker')
+    @include('scripts.deleteconfirm')
 
 @endsection

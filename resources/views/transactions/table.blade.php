@@ -22,9 +22,11 @@
                     <td><a class='btn btn-warning btn-block'
                            href='{{ action("TransactionController@edit", ["id" => $transaction->id]) }}'><i
                                     class='fa fa-pencil'></i></a></td>
-                    <td><a class='btn btn-danger btn-block'
-                           href='{{ action("TransactionController@destroy", ["id" => $transaction->id]) }}'><i
-                                    class='fa fa-trash'></i></a></td>
+                    <td>
+                        {!! Form::open([ 'method'  => 'delete', 'action' => ['TransactionController@destroy', $transaction->id ] ]) !!}
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger  btn-block delete']) !!}
+                        {!! Form::close() !!}
+                    </td>
                 </tr>
             @endforeach
             </tbody>

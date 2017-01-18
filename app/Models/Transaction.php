@@ -20,8 +20,8 @@ class Transaction extends Model
 
     public $rules = [
         'price' => 'required',
-        'description' => 'required',
-        'category_id' => 'required',
+        'description' => 'string',
+        'category_id' => 'required|numeric',
         'date' => 'required|before:tomorrow'
     ];
 

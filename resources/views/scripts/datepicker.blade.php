@@ -1,5 +1,5 @@
 <script>
-    $('#date').datepicker({
+    $('.date').datepicker({
         clearBtn: true,
         autoclose: true,
         todayBtn: "linked"

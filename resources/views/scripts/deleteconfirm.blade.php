@@ -5,7 +5,6 @@
     });
 
     $("#deleteConfirmed").on('click', function () {
-        console.log("sss");
         $('#delete_'+id).submit();
     })
 </script>

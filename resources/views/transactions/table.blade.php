@@ -15,13 +15,17 @@
             <tbody>
             @foreach($transactions as $transaction)
                 <tr>
-                    <td>{{ $transaction->formated_date }}</td>
-                    <td class="@if($transaction->category->type == 'cost') text-danger @else text-success @endif text-right"> {{ $transaction->formated_price }}</td>
-                    <td>{{ $transaction->category->name }}</td>
-                    <td>{{ $transaction->description }}</td>
-                    <td><a class='btn btn-warning btn-block'
-                           href='{{ action("TransactionController@edit", ["id" => $transaction->id]) }}'><i
-                                    class='fa fa-pencil'></i></a></td>
+                    <td data-date="{{ $transaction->formated_date }}">{{ $transaction->formated_date }}</td>
+                    <td data-price="{{ $transaction->price }}"
+                        class="@if($transaction->category->type == 'cost') text-danger @else text-success @endif text-right">
+                        {{ $transaction->formated_price }}</td>
+                    <td data-category="{{ $transaction->category->id }}">{{ $transaction->category->name }}</td>
+                    <td data-description="{{ $transaction->description }}">{{ $transaction->description }}</td>
+                    <td>
+                        <button class='btn btn-warning btn-block edit-button' type="button"
+                                data-id='{{ $transaction->id }}'><i
+                                    class='fa fa-pencil'></i></button>
+                    </td>
                     <td>
                         {!! Form::open([ 'method'  => 'delete', 'action' => ['TransactionController@destroy', $transaction->id], 'id' => 'delete_'.$transaction->id]) !!}
                         <button type="button" class="btn btn-danger btn-block delete" data-toggle="modal"

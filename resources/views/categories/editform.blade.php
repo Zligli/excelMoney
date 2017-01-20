@@ -22,7 +22,7 @@
     </div>
     <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
-            <button type="button" class="btn btn-default cancel-edit">Cancel</button>
+            <button type="reset" class="btn btn-default cancel-edit">Cancel</button>
             <button type="submit" class="btn btn-primary" id="edit-submit">Submit</button>
         </div>
     </div>

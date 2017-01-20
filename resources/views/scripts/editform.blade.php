@@ -50,5 +50,7 @@
 
         $('tr').removeClass('warning');
         $('.edit-button').removeClass('btn-primary').addClass('btn-warning');
+
+        $('.form-group').removeClass('has-error');
     })
 </script>

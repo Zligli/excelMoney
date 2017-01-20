@@ -74,7 +74,6 @@
                             <li><a href="{{ action('BalanceController@index') }}">Daily Balances</a></li>
                             <li class="divider"></li>
                             <li><a href="{{ action('AccountController@index') }}">Accounts</a></li>
-                            <li><a href="{{ action('AccountController@create') }}">Insert New Account</a></li>
                         </ul>
                     </li>
                 </ul>

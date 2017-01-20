@@ -24,21 +24,4 @@ class AccountController extends CRUDController
 
         return view('accounts.index', ['accounts' => $accounts]);
     }
-
-    public function create()
-    {
-
-        return view('accounts.create');
-    }
-
-    public function edit($id)
-    {
-        $account = $this->model->find($id);
-        if (!$account) {
-            return redirect()->back()->with('danger', "There was an error updating!");
-        }
-
-        return view('accounts.edit', ['account' => $account]);
-    }
-
 }

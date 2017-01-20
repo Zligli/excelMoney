@@ -18,6 +18,7 @@
 @section('script')
     @parent
     @include('scripts.deleteconfirm')
+    @include('scripts.editform')
 
 @endsection
 

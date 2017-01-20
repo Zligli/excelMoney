@@ -21,7 +21,9 @@ class Account extends Model
 
     public function getUpdateRulesAttribute()
     {
-        $update_rules = [];
+        $update_rules = [
+            'name' => 'required'
+        ];
 
         return array_merge($this->rules, $update_rules);
     }

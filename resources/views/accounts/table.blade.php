@@ -13,11 +13,22 @@
             <tbody>
             @foreach($accounts as $account)
                 <tr>
-                    <td>{{ $account->name }}</td>
-                    <td>@if($account->type == "bank") Banka @else Keš @endif</td>
-                    <td><a class='btn btn-warning btn-block'
-                           href='{{ action("AccountController@edit", ["id" => $account->id]) }}'><i
-                                    class='fa fa-pencil'></i></a></td>
+                    <td data-name="{{ $account->name }}">{{ $account->name }}</td>
+
+                    @if($account->type == "bank")
+                        @php($type = "bank")
+                    @else
+                        @php($type = "cash")
+                    @endif
+
+                    <td data-type="{{ $type }}">
+                        @if($type == "bank") Banka @else Keš @endif
+                    </td>
+                    <td>
+                        <button class='btn btn-warning btn-block edit-button' type="button"
+                                data-id='{{ $account->id }}'><i class='fa fa-pencil'></i>
+                        </button>
+                    </td>
                     <td>
                         {!! Form::open([ 'method'  => 'delete', 'action' => ['AccountController@destroy', $account->id], 'id' => 'delete_'.$account->id]) !!}
                         <button type="button" class="btn btn-danger btn-block delete" data-toggle="modal"

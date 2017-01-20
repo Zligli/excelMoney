@@ -1,29 +1,28 @@
-{!! Form::open(['method' => 'put', 'action' => ['CategoryController@update', ''], 'class' => 'form-horizontal hidden']) !!}
-<fieldset>
-    <legend>Izmeni kategoriju</legend>
+{!! Form::open(['method' => 'put', 'action' => ['CategoryController@update', ''], 'class' => 'form-horizontal edit-form hidden']) !!}
+<fieldset class="has-warning">
+    <legend class="text-warning">Izmeni kategoriju</legend>
     <div class="form-group @if($errors->first('name')) has-error @endif">
-        <label for="date" class="col-lg-2 control-label">Ime</label>
+        <label for="edit-name" class="col-lg-2 control-label">Ime</label>
         <div class="col-lg-10">
-            <input class="form-control" placeholder="Ime" type="text" name="name"
-                   value="">
+            <input class="form-control" id="edit-name" placeholder="Ime" type="text" name="name" value="">
         </div>
     </div>
     <div class="form-group @if($errors->first('type')) has-error @endif">
-        <label for="select" class="col-lg-2 control-label">Tip</label>
+        <label for="edit-type" class="col-lg-2 control-label">Tip</label>
         <div class="col-lg-10">
-            {!! Form::select('type', ['cost' => 'Troškovi','income' => 'Prihodi'], null, ['class' => "form-control"]) !!}
+            {!! Form::select('type', ['cost' => 'Troškovi','income' => 'Prihodi'], null, ['class' => "form-control", 'id' => 'edit-type']) !!}
         </div>
     </div>
     <div class="form-group @if($errors->first('main_category_id')) has-error @endif">
-        <label for="select" class="col-lg-2 control-label">Glavna Kategorija</label>
+        <label for="edit-main_category_id" class="col-lg-2 control-label">Glavna Kategorija</label>
         <div class="col-lg-10">
-            {!! Form::select('main_category_id', $main_categories, null, ['class' => "form-control"]) !!}
+            {!! Form::select('main_category_id', $main_categories, null, ['class' => "form-control", 'id' => 'edit-main_category_id']) !!}
         </div>
     </div>
     <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
-            <a href="{{ url()->previous() }}" class="btn btn-default">Cancel</a>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-default cancel-edit">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="edit-submit">Submit</button>
         </div>
     </div>
 </fieldset>

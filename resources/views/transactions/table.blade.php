@@ -23,8 +23,8 @@
                     <td data-description="{{ $transaction->description }}">{{ $transaction->description }}</td>
                     <td>
                         <button class='btn btn-warning btn-block edit-button' type="button"
-                                data-id='{{ $transaction->id }}'><i
-                                    class='fa fa-pencil'></i></button>
+                                data-id='{{ $transaction->id }}'><i class='fa fa-pencil'></i>
+                        </button>
                     </td>
                     <td>
                         {!! Form::open([ 'method'  => 'delete', 'action' => ['TransactionController@destroy', $transaction->id], 'id' => 'delete_'.$transaction->id]) !!}

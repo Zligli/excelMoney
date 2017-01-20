@@ -1,4 +1,4 @@
-{!! Form::open(['method' => 'post', 'action' => 'MainCategoryController@store', 'class' => 'form-horizontal']) !!}
+{!! Form::open(['method' => 'post', 'action' => 'MainCategoryController@store', 'class' => 'form-horizontal new-form']) !!}
 <fieldset>
     <legend>Kreiraj glavnu kategoriju</legend>
     <div class="form-group @if($errors->first('name')) has-error @endif">
@@ -9,7 +9,6 @@
     </div>
     <div class="form-group">
         <div class="col-lg-9 col-lg-offset-3">
-            <a href="{{ url()->previous() }}" class="btn btn-default">Cancel</a>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>

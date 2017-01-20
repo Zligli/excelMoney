@@ -13,11 +13,13 @@
             <tbody>
             @foreach($mainCategories as $mainCategory)
                 <tr>
-                    <td>{{ $mainCategory->name }}</td>
+                    <td data-name="{{ $mainCategory->name }}">{{ $mainCategory->name }}</td>
                     <td>{{ $mainCategory->nameList() }}</td>
-                    <td><a class='btn btn-warning btn-block'
-                           href='{{ action("MainCategoryController@edit", ["id" => $mainCategory->id]) }}'>
-                            <i class='fa fa-pencil'></i></a></td>
+                    <td>
+                        <button class='btn btn-warning btn-block edit-button' type="button"
+                                data-id='{{ $mainCategory->id }}'><i class='fa fa-pencil'></i>
+                        </button>
+                    </td>
                     <td>
                         {!! Form::open([ 'method'  => 'delete', 'action' => ['MainCategoryController@destroy', $mainCategory->id], 'id' => 'delete_'.$mainCategory->id]) !!}
                         <button type="button" class="btn btn-danger btn-block delete" data-toggle="modal"

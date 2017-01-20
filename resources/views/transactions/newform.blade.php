@@ -14,21 +14,22 @@
             <div class="input-group">
                 <span class="input-group-addon">DIN</span>
                 <input class="form-control" id="price" placeholder="Iznos" type="number" name="price"
-                       step="any">
+                       value="{{ old('price') }}" step="any">
             </div>
         </div>
     </div>
     <div class="form-group @if($errors->first('description')) has-error @endif">
         <label for="description" class="col-lg-3 control-label">Opis</label>
         <div class="col-lg-9">
-            <textarea class="form-control" rows="3" id="description" name="description"></textarea>
+            <textarea class="form-control" rows="3" id="description"
+                      name="description">{{ old('description') }}</textarea>
             <span class="help-block">Duži opis ostvarene transakcije.</span>
         </div>
     </div>
     <div class="form-group @if($errors->first('category_id')) has-error @endif">
         <label for="select" class="col-lg-3 control-label">Kategorija</label>
         <div class="col-lg-9">
-            {!! Form::select('category_id', $groupedCategories, null, ['class' => "form-control",  'id '=> "select"]) !!}
+            {!! Form::select('category_id', $groupedCategories, old('category_id'), ['class' => "form-control",  'id '=> "select"]) !!}
         </div>
     </div>
     <div class="form-group">

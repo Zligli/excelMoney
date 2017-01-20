@@ -62,7 +62,6 @@
                             <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ action('CategoryController@index') }}">Categories</a></li>
-                            <li><a href="{{ action('CategoryController@create') }}">Insert Category</a></li>
                             <li class="divider"></li>
                             <li><a href="{{ action('MainCategoryController@index') }}">Main Categories</a></li>
                             <li><a href="{{ action('MainCategoryController@create') }}">Insert Main Category</a></li>

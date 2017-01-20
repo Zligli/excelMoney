@@ -23,25 +23,8 @@ class CategoryController extends CRUDController
     public function index()
     {
         $categories = $this->model->paginate(10);
-
-        return view('categories.index', ['categories' => $categories]);
-    }
-
-    public function create()
-    {
         $main_categories = $this->mainCategory->pluck('name', 'id');
 
-        return view('categories.create', ['main_categories' => $main_categories]);
-    }
-
-    public function edit($id)
-    {
-        $category = $this->model->find($id);
-        if (!$category) {
-            return redirect()->back()->with('danger', "There was an error updating!");
-        }
-        $main_categories = $this->mainCategory->pluck('name', 'id');
-
-        return view('categories.edit', ['category' => $category, 'main_categories' => $main_categories]);
+        return view('categories.index', ['categories' => $categories, 'main_categories' => $main_categories]);
     }
 }

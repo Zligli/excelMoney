@@ -34,3 +34,8 @@ Route::resource('accounts', "AccountController");
 /*  Balance
 /**-------------------*/
 Route::resource('balance', "BalanceController");
+
+/**-------------------*/
+/*  Statistics
+/**-------------------*/
+Route::get('statistics', "StatisticController@index");

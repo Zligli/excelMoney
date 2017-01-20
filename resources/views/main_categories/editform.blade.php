@@ -1,4 +1,4 @@
-{!! Form::open(['method' => 'put', 'action' => ['MainCategoryController@update', ''], 'class' => 'form-horizontal edit-form hidden']) !!}
+{!! Form::open(['method' => 'put', 'action' => ['MainCategoryController@update', ''], 'class' => 'form-horizontal edit-form '.$update]) !!}
 <fieldset class="has-warning">
     <legend class="text-warning">Izmeni glavnu kategoriju</legend>
     <div class="form-group @if($errors->first('name')) has-error @endif">

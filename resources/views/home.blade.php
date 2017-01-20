@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('transactions.balancenotification')
 
-    @include('transactions.balancenotification', ['balanceWarning' => $balanceWarning, 'balance' => $balance, 'bookBalance' => $bookBalance])
-
+    @if($errors->first() == 'update') @php $update = ''; $create = 'hidden' @endphp @else @php $update = 'hidden'; $create = '' @endphp @endif
     <div class="row">
         <div class="col-md-5">
             @include('transactions.newform')
@@ -22,7 +22,5 @@
 @section('script')
     @parent
     @include('scripts.datepicker')
-    @include('scripts.deleteconfirm')
-    @include('scripts.editform')
 
 @endsection

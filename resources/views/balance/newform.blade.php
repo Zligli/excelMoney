@@ -1,4 +1,4 @@
-{!! Form::open(['method' => 'post', 'action' => 'BalanceController@store', 'class' => 'form-horizontal', 'id' => 'balance']) !!}
+{!! Form::open(['method' => 'post', 'action' => 'BalanceController@store', 'class' => 'form-horizontal '.$create, 'id' => 'balance']) !!}
 <fieldset>
     <legend>Unesi stanje</legend>
     <div class="form-group @if($errors->first('date')) has-error @endif">

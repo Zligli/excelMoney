@@ -1,4 +1,4 @@
-{!! Form::open(['method' => 'post', 'action' => 'AccountController@store', 'class' => 'form-horizontal new-form']) !!}
+{!! Form::open(['method' => 'post', 'action' => 'AccountController@store', 'class' => 'form-horizontal new-form '.$create]) !!}
 <fieldset>
     <legend>Kreiraj račun</legend>
     <div class="form-group @if($errors->first('name')) has-error @endif">

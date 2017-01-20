@@ -40,7 +40,7 @@ class CRUDController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, $this->model->update_rules);
+        $this->validate($request, $this->model->update_rules, ['*' => 'update']);
         $data = $request->all();
 
         if (isset($data['date'])) {

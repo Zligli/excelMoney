@@ -122,6 +122,10 @@
             $(this).attr("disabled", "disabled");
         })
     </script>
+
+    @include('scripts.deleteconfirm')
+    @include('scripts.editform')
+
 @show
 </body>
 </html>

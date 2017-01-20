@@ -1,4 +1,4 @@
-{!! Form::open(['method' => 'post', 'action' => 'TransactionController@store', 'class' => 'form-horizontal new-form', 'id' => 'transaction']) !!}
+{!! Form::open(['method' => 'post', 'action' => 'TransactionController@store', 'class' => 'form-horizontal new-form '.$create, 'id' => 'transaction']) !!}
 <fieldset>
     <legend>Nov Trošak</legend>
     <div class="form-group @if($errors->first('date')) has-error @endif">

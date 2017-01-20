@@ -26,29 +26,12 @@ class BalanceController extends CRUDController
     public function index()
     {
         $balances = $this->model->orderBy('date', 'desc')->paginate(10);
-
-        return view('balance.index', ['balances' => $balances]);
-    }
-
-    public function create()
-    {
-        $balance = $this->model->orderBy('date', 'desc')->first();
+        $balance = $balances->first();
         $accounts = $this->account->all();
         $currentDate = Carbon::now()->format(config('custom.show_date'));
 
-        return view('balance.create', ['balance' => $balance, 'accounts' => $accounts, 'currentDate' => $currentDate]);
-    }
-
-    public function edit($id)
-    {
-        $balance = $this->model->find($id);
-        if (!$balance) {
-            return redirect()->back()->with('danger', "There was an error updating!");
-        }
-
-        $accounts = $this->account->all();
-
-        return view('balance.edit', ['balance' => $balance, 'accounts' => $accounts]);
+        return view('balance.index',
+            ['balance' => $balance, 'balances' => $balances, 'accounts' => $accounts, 'currentDate' => $currentDate]);
     }
 
     public function store(Request $request)

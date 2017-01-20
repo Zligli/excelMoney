@@ -10,7 +10,7 @@
             @include('transactions.editform')
         </div>
         <div class="col-md-5 col-md-offset-1">
-            @include('balance.form')
+            @include('balance.newform')
         </div>
     </div>
 

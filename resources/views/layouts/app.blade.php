@@ -64,7 +64,6 @@
                             <li><a href="{{ action('CategoryController@index') }}">Categories</a></li>
                             <li class="divider"></li>
                             <li><a href="{{ action('MainCategoryController@index') }}">Main Categories</a></li>
-                            <li><a href="{{ action('MainCategoryController@create') }}">Insert Main Category</a></li>
                         </ul>
                     </li>
 

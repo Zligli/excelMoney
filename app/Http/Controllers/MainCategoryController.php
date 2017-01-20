@@ -24,21 +24,4 @@ class MainCategoryController extends CRUDController
 
         return view('main_categories.index', ['mainCategories' => $mainCategories]);
     }
-
-    public function create()
-    {
-
-        return view('main_categories.create');
-    }
-
-    public function edit($id)
-    {
-        $main_category = $this->model->find($id);
-        if (!$main_category) {
-            return redirect()->back()->with('danger', "There was an error updating!");
-        }
-
-        return view('main_categories.edit', ['main_category' => $main_category]);
-    }
-
 }

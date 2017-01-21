@@ -8,6 +8,8 @@
         $('.edit-form').removeClass('hidden');
         $('.new-form').addClass('hidden');
 
+        $('.form-group').removeClass('has-error');
+
         //Add warning class to tr and btn-primary to clicked button
         $('tr').removeClass('warning');
         tr.addClass('warning');

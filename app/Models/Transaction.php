@@ -16,7 +16,7 @@ class Transaction extends Model
 
     protected $appends = ['formated_date', 'category_name', 'formated_price', 'type'];
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'date'];
 
     public $rules = [
         'price' => 'required',
@@ -57,5 +57,19 @@ class Transaction extends Model
     public function getTypeAttribute()
     {
         return $this->category->type;
+    }
+
+    public function scopeIncomes($query)
+    {
+        return $query->whereHas('category', function ($q) {
+            $q->where('type', '=', 'income');
+        });
+    }
+
+    public function scopeCosts($query)
+    {
+        return $query->whereHas('category', function ($q) {
+            $q->where('type', '=', 'cost');
+        });
     }
 }

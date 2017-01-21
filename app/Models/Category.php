@@ -42,4 +42,14 @@ class Category extends Model
     {
         return $this->where(['name' => $name])->first();
     }
+
+    public function scopeIncomes($query)
+    {
+        return $query->where('type', '=', 'income');
+    }
+
+    public function scopeCosts($query)
+    {
+        return $query->where('type', '=', 'cost');
+    }
 }

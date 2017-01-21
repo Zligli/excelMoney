@@ -114,8 +114,9 @@
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+
     <script src="{{ asset('scripts/datepicker/bootstrap-datepicker.min.js') }}" crossorigin="anonymous"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <script src="{{ asset('scripts/echarts/dist/echarts.min.js') }}"></script>
 
     <script>
         $(":submit").on("click", function () {

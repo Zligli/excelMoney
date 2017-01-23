@@ -45,16 +45,20 @@ class HomeController extends CRUDController
         }
 
         $balance = $this->balance->orderBy('date', 'desc')->first();
+        $balanceAmountSum = array_get($balance, 'amount_sum', 0);
         $bookBalance = $this->bookBalance();
-        $balanceWarning = $this->checkBalance($bookBalance, $balance);
+        $balanceDiff = abs($balanceAmountSum - $bookBalance);
+        $balanceWarning = $this->checkBalance($balanceDiff);
 
         return view('home', [
             'balance' => $balance,
             'accounts' => $accounts,
             'bookBalance' => $bookBalance,
+            'balanceDiff' => $balanceDiff,
             'currentDate' => $currentDate,
             'transactions' => $transactions,
             'balanceWarning' => $balanceWarning,
+            'balanceAmountSum' => $balanceAmountSum,
             'groupedCategories' => $groupedCategories
         ]);
     }
@@ -72,10 +76,8 @@ class HomeController extends CRUDController
         return $income - $costs;
     }
 
-    public function checkBalance($bookBalance, $balance)
+    public function checkBalance($balanceDiff)
     {
-        $difference = abs($bookBalance - $balance->amount_sum);
-
-        return $difference > config('custom.balance_diff');
+        return $balanceDiff > config('custom.balance_diff');
     }
 }

@@ -1,7 +1,7 @@
 <div class="alert alert-dismissible @if($balanceWarning) alert-danger @else well @endif">
     <p class="lead text-center">
-        Stvarno stanje: {{ Helper::price($balance->amount_sum) }} -
+        Stvarno stanje: {{ Helper::price($balanceAmountSum) }} -
         Knjigovodstveno: {{ Helper::price($bookBalance) }}.
-        Razlika je: {{ Helper::price(abs($balance->amount_sum - $bookBalance)) }}
+        Razlika je: {{ Helper::price($balanceDiff) }}
     </p>
 </div>

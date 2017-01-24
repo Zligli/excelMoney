@@ -8,3 +8,9 @@ Homestead.json
 .idea
 .idea/ExcelMoney.iml
 .idea/workspace.xml
+.idea/misc.xml
+*.iml
+*.text
+.idea/workspace.xml
+*.xml
+.idea/ExcelMoney.iml

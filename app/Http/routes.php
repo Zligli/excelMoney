@@ -38,4 +38,4 @@ Route::resource('balance', "BalanceController");
 /**-------------------*/
 /*  Statistics
 /**-------------------*/
-Route::get('statistics', "StatisticController@index");
+Route::get('statistics', "StatisticController@index")->middleware('auth');

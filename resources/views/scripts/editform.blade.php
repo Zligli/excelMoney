@@ -5,6 +5,8 @@
         var td = $(this).parent();
         var tr = td.parent();
 
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+
         $('.edit-form').removeClass('hidden');
         $('.new-form').addClass('hidden');
 

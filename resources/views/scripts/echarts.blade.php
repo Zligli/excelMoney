@@ -1,3 +1,4 @@
+<script src="{{ asset('scripts/echarts/dist/echarts.min.js') }}"></script>
 <script>
     var theme = {
         color: [

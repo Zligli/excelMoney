@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>EMoney</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
@@ -46,7 +46,7 @@
 
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                Money
+                EMoney
             </a>
         </div>
 
@@ -113,17 +113,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"
             integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
             crossorigin="anonymous"></script>
-    <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 
-    <script src="{{ asset('scripts/datepicker/bootstrap-datepicker.min.js') }}" crossorigin="anonymous"></script>
-    <script src="{{ asset('scripts/echarts/dist/echarts.min.js') }}"></script>
-
-    <script>
-        $(":submit").on("click", function () {
-            $(this).attr("disabled", "disabled");
-        })
-    </script>
-
+    @include('scripts.preventsubmit')
     @include('scripts.deleteconfirm')
     @include('scripts.editform')
 

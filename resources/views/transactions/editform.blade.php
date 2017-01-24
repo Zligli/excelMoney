@@ -4,8 +4,7 @@
     <div class="form-group @if($errors->first('date')) has-error @endif">
         <label for="edit-date" class="col-lg-3 control-label">Datum</label>
         <div class="col-lg-9">
-            <input class="form-control date" id="edit-date" placeholder="Datum" type="date" name="date"
-                   value="{{ old('date') }}"
+            <input class="form-control date" id="edit-date" placeholder="Datum" name="date" value="{{ old('date') }}"
                    data-date-end-date="0d">
         </div>
     </div>

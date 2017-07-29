@@ -157,8 +157,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
-        Collective\Html\HtmlServiceProvider::class,
-        GrahamCampbell\Dropbox\DropboxServiceProvider::class
+        Collective\Html\HtmlServiceProvider::class
     ],
 
     /*
@@ -208,8 +207,7 @@ return [
 
         'Helper' => App\Helpers\Helper::class,
         'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class,
-        'Dropbox' => GrahamCampbell\Dropbox\Facades\Dropbox::class
+        'Html' => Collective\Html\HtmlFacade::class
     ],
 
 ];

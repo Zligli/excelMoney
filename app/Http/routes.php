@@ -1,6 +1,6 @@
 <?php
 
-Route::auth();
+Auth::routes();
 
 Route::get('/', 'HomeController@index');
 

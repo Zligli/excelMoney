@@ -5,4 +5,9 @@
         autoclose: true,
         todayBtn: "linked"
     });
+    $('.date-range').datepicker({
+        clearBtn: true,
+        autoclose: true,
+        todayBtn: "linked"
+    });
 </script>

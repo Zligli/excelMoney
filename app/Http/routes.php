@@ -2,7 +2,7 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+Route::match(['GET', 'POST'], '/', 'HomeController@index');
 
 /**-------------------*/
 /*  Initial IMPORT

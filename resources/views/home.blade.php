@@ -24,5 +24,6 @@
 @section('script')
     @parent
     @include('scripts.datepicker')
+    @include('scripts.selectize')
 
 @endsection

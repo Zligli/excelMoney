@@ -1,5 +1,27 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
+        <div class="row form-horizontal">
+            {!! Form::open(['method' => 'GET', 'action' => 'HomeController@index', 'id' => 'filter']) !!}
+
+            <div class="col-lg-3">
+                {!! Form::select('category_filter[]', $groupedCategories, array_get($filters, 'category_filter'), ['class' => "form-control",  'id '=> "select",  "multiple" => "multiple"]) !!}
+            </div>
+            <div class="col-lg-4">
+                <div class="date-range input-daterange  input-group" data-date-end-date="0d">
+                    {!! Form::text('from_date', Input::get('from_date'), ["class" => "input-sm form-control", "placeholder" => "From date"]) !!}
+                    <span class="input-group-addon">to</span>
+                    {!! Form::text('to_date', Input::get('to_date'), ["class" => "input-sm form-control", "placeholder" => "To date"]) !!}
+                </div>
+            </div>
+            <div class="col-lg-3">
+                {!! Form::text('search_filter',Input::get('search_filter'), ["class" => "input-sm form-control", "placeholder" => "Search"]) !!}
+            </div>
+            <div class="col-lg-2">
+                <button type="submit" class="btn btn-primary btn-sm" form="filter">Filter</button>
+            </div>
+            {!! Form::close() !!}
+        </div>
+        <hr>
         <legend>Transakcije</legend>
         <table class="table table-striped table-hover ">
             <thead>
@@ -37,6 +59,6 @@
             @endforeach
             </tbody>
         </table>
-        {{ $transactions->links() }}
+        {{ $transactions->appends(\Input::all())->links() }}
     </div>
 </div>

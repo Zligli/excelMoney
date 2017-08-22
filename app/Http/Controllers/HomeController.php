@@ -7,6 +7,7 @@ use App\Models\Account;
 use App\Models\Balance;
 use App\Models\Transaction;
 use App\Models\MainCategory;
+use Illuminate\Support\Facades\Input;
 
 class HomeController extends CRUDController
 {
@@ -32,7 +33,25 @@ class HomeController extends CRUDController
 
     public function index()
     {
-        $transactions = $this->model->orderBy('date', 'desc')->paginate(10);
+        $params = Input::all();
+        $categoryFilter = array_get($params, 'category_filter');
+        $fromDateFilter = Carbon::parse(array_get($params, 'from_date'))->format('Y-m-d');
+        $toDateFilter = Carbon::parse(array_get($params, 'to_date'))->format('Y-m-d');
+        $search = array_get($params, 'search_filter');
+
+        $query = $this->model->query();
+
+        if ($categoryFilter) {
+            $query->whereIn('category_id', $categoryFilter);
+        }
+        if(isset($fromDateFilter) && isset($toDateFilter)) {
+            $query->whereBetween('date', [$fromDateFilter, $toDateFilter]);
+        }
+        if ($search) {
+            $query->where('description', 'like', "%$search%");
+        }
+
+        $transactions = $query->orderBy('date', 'desc')->paginate(10);
 
         $mainCategories = $this->mainCategory->all();
 
@@ -51,6 +70,8 @@ class HomeController extends CRUDController
         $balanceWarning = $this->checkBalance($balanceDiff);
 
         return view('home', [
+
+            'filters' => $params,
             'balance' => $balance,
             'accounts' => $accounts,
             'bookBalance' => $bookBalance,

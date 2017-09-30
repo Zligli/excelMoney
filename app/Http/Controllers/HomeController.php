@@ -35,8 +35,10 @@ class HomeController extends CRUDController
     {
         $params = Input::all();
         $categoryFilter = array_get($params, 'category_filter');
-        $fromDateFilter = Carbon::parse(array_get($params, 'from_date'))->format('Y-m-d');
-        $toDateFilter = Carbon::parse(array_get($params, 'to_date'))->format('Y-m-d');
+        $fromDate = array_get($params, 'from_date');
+        $fromDateFilter = $fromDate ? Carbon::parse($fromDate)->format('Y-m-d') : null;
+        $toDate = array_get($params, 'to_date');
+        $toDateFilter = $toDate ? Carbon::parse($toDate)->format('Y-m-d'): null;
         $search = array_get($params, 'search_filter');
 
         $query = $this->model->query();
@@ -44,7 +46,7 @@ class HomeController extends CRUDController
         if ($categoryFilter) {
             $query->whereIn('category_id', $categoryFilter);
         }
-        if(isset($fromDateFilter) && isset($toDateFilter)) {
+        if (isset($fromDateFilter) && isset($toDateFilter)) {
             $query->whereBetween('date', [$fromDateFilter, $toDateFilter]);
         }
         if ($search) {

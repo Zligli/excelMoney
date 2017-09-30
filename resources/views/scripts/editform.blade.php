@@ -5,7 +5,7 @@
         var td = $(this).parent();
         var tr = td.parent();
 
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $("html, body").animate({scrollTop: 0}, "slow");
 
         $('.edit-form').removeClass('hidden');
         $('.new-form').addClass('hidden');
@@ -30,17 +30,15 @@
         //Set data from tr to form
         $("#edit-date").val(date);
         $("#edit-price").val(price);
-        $("#edit-category_id").val(category);
         $("#edit-description").val(description);
         $("#edit-name").val(name);
         $("#edit-type").val(type);
-        $("#edit-main_category_id").val(main_category_id);
+        $("#edit-category_id").select2().val([category]).trigger("change");
     });
 
     $('#edit-submit').on('click', function (event) {
         event.preventDefault();
         var form = $(".edit-form");
-        console.log(form)
         var action = form.attr('action');
 
         //Add id to update route

@@ -2,6 +2,7 @@
 
 return [
 
+    'name' => env('APP_NAME', 'ExcelMoney'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -157,7 +158,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
-        Collective\Html\HtmlServiceProvider::class
+        Collective\Html\HtmlServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
     ],
 
     /*
@@ -208,7 +210,8 @@ return [
 
         'Helper' => App\Helpers\Helper::class,
         'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Notification' => Illuminate\Support\Facades\Notification::class,
     ],
 
 ];

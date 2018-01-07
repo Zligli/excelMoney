@@ -160,6 +160,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
+        App\Providers\DropboxServiceProvider::class
     ],
 
     /*
